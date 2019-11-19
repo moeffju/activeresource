@@ -168,7 +168,7 @@ module ActiveResource::Associations
       elsif reflection.klass.respond_to?(:singleton_name)
         instance_variable_set(ivar_name, reflection.klass.find(params: { :"#{self.class.element_name}_id" => self.id }))
       else
-        instance_variable_set(ivar_name, reflection.klass.find(:one, from: "/#{self.class.collection_name}/#{self.id}/#{method_name}#{self.class.format_extension}"))
+        instance_variable_set(ivar_name, reflection.klass.find(:one, from: self.class.site.merge("#{self.class.collection_name}/#{self.id}/#{method_name}#{self.class.format_extension}").to_s))
       end
     end
   end

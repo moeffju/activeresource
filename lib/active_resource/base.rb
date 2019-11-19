@@ -1087,7 +1087,7 @@ module ActiveResource
           when Symbol
             instantiate_record(get(from, options[:params]))
           when String
-            path = "#{from}#{query_string(options[:params])}"
+            path = self.site.merge("#{from}#{query_string(options[:params])}").to_s
             instantiate_record(format.decode(connection.get(path, headers).body))
           end
         end
